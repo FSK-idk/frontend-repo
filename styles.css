@@ -1,9 +1,6 @@
-* {
-  font-size: 32pt;
-}
-
-h1 {
-  font-size: 42pt;
+:root {
+  --title-font-family: Montserrat, sans-serif;
+  --text-font-family: Open Sans, sans-serif;
 }
 
 html {
@@ -15,6 +12,13 @@ body {
   flex-direction: column;
   height: 100%;
   margin: 0;
+  font-family: var(--text-font-family);
+  font-size: 2em;
+}
+
+h1 {
+  font-family: var(--title-font-family);
+  font-size: 2.2em;
 }
 
 .main {
@@ -27,7 +31,8 @@ body {
   padding: 20px;
 }
 
-header {
+header,
+footer {
   background-color: aquamarine;
   padding: 20px;
   border: 4px solid darkcyan;
@@ -35,8 +40,7 @@ header {
 
 footer {
   background-color: lightseagreen;
-  padding: 20px;
-  border: 4px dashed darkcyan;
+  border-style: dashed;
 }
 
 .block-container {
@@ -68,9 +72,20 @@ footer {
 #hello-button {
   background-color: azure;
   padding: 10px;
+  font-family: var(--title-font-family);
+  font-size: 1.5em;
   cursor: pointer;
 }
 
 #hello-button:hover {
   background-color: lightsteelblue;
+}
+
+.block-image {
+  width: 50%;
+  border-radius: 20px;
+}
+
+.block-image:hover {
+  opacity: 70%;
 }
