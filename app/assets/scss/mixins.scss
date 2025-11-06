@@ -1,0 +1,21 @@
+@use "sass:color";
+@use "assets/scss/variables.scss" as *;
+
+@mixin card($fill: gray) {
+  padding: 20px;
+  background-color: $fill;
+  border: none;
+  border-radius: 10px;
+}
+
+@mixin button($fill: gray) {
+  @include card($fill);
+  cursor: pointer;
+
+  &:hover {
+    background-color: color.adjust($fill, $blackness: 5%);
+  }
+  &:active {
+    background-color: color.adjust($fill, $blackness: 10%);
+  }
+}
