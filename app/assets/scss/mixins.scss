@@ -8,6 +8,12 @@
   border-radius: 10px;
 }
 
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 @mixin button($fill: gray) {
   @include card($fill);
   cursor: pointer;
