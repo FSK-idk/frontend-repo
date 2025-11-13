@@ -1,9 +1,9 @@
 <template>
-  <div class="main">
+  <main>
     <Header />
     <Content />
     <Footer />
-  </div>
+  </main>
 </template>
 <style lang="scss">
 @use "assets/scss/variables.scss" as *;
@@ -12,26 +12,23 @@ body {
   margin: 0;
   padding: 0;
   font-family: $font-text;
-  font-size: 1.5em;
+  font-size: 24px;
 }
 
 p,
 button {
   font-family: $font-text;
-  font-size: 1.5em;
+  font-size: 24px;
 }
 
 h1 {
   font-family: $font-title;
-  font-size: 1.8em;
+  font-size: 36px;
 }
 
-.main {
+main {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   height: 100vh;
-  background-color: $snow;
-  color: $night;
 }
 </style>

@@ -1,12 +1,7 @@
 <template>
   <div class="block-container">
     <div class="block">
-      <p>Изучаем:</p>
-      <ul>
-        <li>Nuxt</li>
-        <li>Миксины</li>
-        <li>Scss</li>
-      </ul>
+      <p>Верстаем шапку...</p>
     </div>
     <div class="block" id="main-block">
       <Banner />
@@ -43,13 +38,13 @@
   gap: 20px;
   height: 100%;
   padding: 20px;
+  background-color: cadetblue;
 }
 
 .block {
   @include mixins.card(aqua);
   flex: 1 1 0;
   padding: 20px;
-  background-color: aqua;
 }
 
 #main-block {
