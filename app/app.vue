@@ -6,7 +6,7 @@
   </main>
 </template>
 <style lang="scss">
-@use "assets/scss/variables.scss" as *;
+@use "assets/scss/variables" as *;
 
 body {
   margin: 0;
@@ -26,9 +26,19 @@ h1 {
   font-size: 36px;
 }
 
+a {
+  text-decoration: none;
+}
+
+html,
+body,
+#__nuxt,
+main {
+  height: 100%;
+}
+
 main {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 </style>

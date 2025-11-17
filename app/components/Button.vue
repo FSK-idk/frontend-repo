@@ -1,5 +1,7 @@
 <template>
-  <button><slot /></button>
+  <div class="button">
+    <button><slot /></button>
+  </div>
 </template>
 <style lang="scss" scoped>
 @use "assets/scss/variables" as *;

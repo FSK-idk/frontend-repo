@@ -1,16 +1,22 @@
 <script setup>
-const base = import.meta.env.BASE_URL;
-
-defineProps({
+const props = defineProps({
   src: {
     type: String,
     required: true,
   },
 });
+
+const base = import.meta.env.BASE_URL;
+
+const Icon = computed(() => {
+  return defineAsyncComponent(() =>
+    import(/* @vite-ignore */ `${base}${props.src}`)
+  );
+});
 </script>
 <template>
-  <div class="container">
-    <img :src="`${base}assets/images/${src}`" />
+  <div class="icon-text">
+    <Icon width="16" height="16" />
     <div><slot /></div>
   </div>
 </template>
@@ -18,10 +24,9 @@ defineProps({
 @use "assets/scss/variables" as *;
 @use "assets/scss/mixins" as mixins;
 
-.container {
+.icon-text {
   @include mixins.flex-row;
   gap: 8px;
-  color: $dark-slate-gray;
   font-family: $font-title;
   font-size: 14px;
 }

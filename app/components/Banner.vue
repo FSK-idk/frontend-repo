@@ -7,8 +7,8 @@
 </template>
 <style lang="scss">
 @use "sass:color" as color;
-@use "assets/scss/variables.scss" as *;
-@use "assets/scss/mixins.scss" as mixins;
+@use "assets/scss/variables" as *;
+@use "assets/scss/mixins" as mixins;
 
 .banner {
   @include mixins.card(color.adjust(gold, $whiteness: -50%));

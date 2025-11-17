@@ -12,5 +12,11 @@ export default defineNuxtConfig({
         },
       },
     ],
+    [
+      "nuxt-svgo",
+      {
+        defaultImport: "component",
+      },
+    ],
   ],
 });
