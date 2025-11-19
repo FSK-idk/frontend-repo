@@ -12,5 +12,12 @@ export default defineNuxtConfig({
         },
       },
     ],
+    [
+      "nuxt-svgo",
+      {
+        defaultImport: "component",
+      },
+    ],
   ],
+  css: ["assets/scss/main.scss"],
 });

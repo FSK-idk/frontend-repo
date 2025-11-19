@@ -14,6 +14,17 @@
   align-items: center;
 }
 
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+@mixin simple-ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 @mixin button($fill: gray) {
   @include card($fill);
   cursor: pointer;

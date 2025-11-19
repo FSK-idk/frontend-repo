@@ -27,8 +27,8 @@ const changeGreeting = () => {
   </div>
 </template>
 <style lang="scss">
-@use "assets/scss/variables.scss" as *;
-@use "assets/scss/mixins.scss" as mixins;
+@use "assets/scss/variables" as *;
+@use "assets/scss/mixins" as mixins;
 
 .greeting {
   display: flex;

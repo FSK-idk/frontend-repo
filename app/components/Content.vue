@@ -1,7 +1,7 @@
 <template>
   <div class="block-container">
     <div class="block">
-      <p>Верстаем шапку...</p>
+      <p>Верстаем подвал...</p>
     </div>
     <div class="block" id="main-block">
       <Banner />
@@ -28,8 +28,8 @@
 </template>
 <style lang="scss">
 @use "sass:color" as color;
-@use "assets/scss/variables.scss" as *;
-@use "assets/scss/mixins.scss" as mixins;
+@use "assets/scss/variables" as *;
+@use "assets/scss/mixins" as mixins;
 
 .block-container {
   display: flex;
