@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  variant: {
+    type: String,
+    default: "primary",
+  },
 });
 
 const base = import.meta.env.BASE_URL;
@@ -15,19 +19,36 @@ const Icon = computed(() => {
 });
 </script>
 <template>
-  <div class="icon-text">
-    <Icon width="16" height="16" />
-    <div><slot /></div>
+  <div :class="['icon-text', variant]">
+    <Icon :class="['icon', variant]" />
+    <slot />
   </div>
 </template>
 <style lang="scss" scoped>
-@use "assets/scss/variables" as *;
-@use "assets/scss/mixins" as mixins;
+@use "assets/scss/variables" as v;
+@use "assets/scss/mixins" as m;
 
 .icon-text {
-  @include mixins.flex-row;
+  @include m.row-center;
+  align-items: start;
   gap: 8px;
-  font-family: $font-title;
+
+  font-family: v.$font-title;
   font-size: 14px;
+}
+
+.icon {
+  flex-shrink: 0;
+
+  width: 16px;
+  height: 16px;
+
+  &.primary {
+    fill: v.$color-primary;
+  }
+
+  &.white {
+    fill: v.$color-white;
+  }
 }
 </style>
