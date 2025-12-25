@@ -1,15 +1,7 @@
 <template>
   <div class="block-container">
     <div class="block">
-      <p>Верстаем подвал...</p>
-    </div>
-    <div class="block" id="main-block">
-      <Banner />
-      <Greeting />
-      <div class="card-container">
-        <div class="card">Сюда</div>
-        <div class="card">Туда</div>
-      </div>
+      <p>Мы очень отзывчивы...</p>
     </div>
     <div class="block">
       <div style="text-align: center">
@@ -28,8 +20,8 @@
 </template>
 <style lang="scss">
 @use "sass:color" as color;
-@use "assets/scss/variables" as *;
-@use "assets/scss/mixins" as mixins;
+@use "assets/scss/variables" as v;
+@use "assets/scss/mixins" as m;
 
 .block-container {
   display: flex;
@@ -42,18 +34,9 @@
 }
 
 .block {
-  @include mixins.card(aqua);
+  @include m.card(aqua);
   flex: 1 1 0;
   padding: 20px;
-}
-
-#main-block {
-  flex: 2 2 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-color: gold;
 }
 
 .card-container {
@@ -66,7 +49,7 @@
 }
 
 .card {
-  @include mixins.card($snow);
+  @include m.card(v.$snow);
   flex: 0 1 auto;
 }
 

@@ -1,4 +1,5 @@
 @use "sass:color";
+@use "sass:map";
 @use "assets/scss/variables.scss" as *;
 
 @mixin card($fill: gray) {
@@ -8,21 +9,36 @@
   border-radius: 10px;
 }
 
-@mixin flex-row {
+@mixin row-center {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: start;
 }
 
-@mixin flex-column {
+@mixin column-center {
   display: flex;
   flex-direction: column;
-  align-items: left;
+  align-items: center;
+  justify-content: start;
 }
 
-@mixin simple-ul {
-  list-style-type: none;
-  padding: 0;
+$sizes: (
+  "small": 600px,
+  "medium": 900px,
+  "large": 1100px,
+);
+
+@mixin at-least($size) {
+  @media (width >= map.get($sizes, $size)) {
+    @content;
+  }
+}
+
+@mixin at-most($size) {
+  @media (width < map.get($sizes, $size)) {
+    @content;
+  }
 }
 
 @mixin button($fill: gray) {

@@ -1,4 +1,10 @@
 <script setup>
+const emits = defineEmits(["toggle-drawer"]);
+
+const toggleDrawer = () => {
+  emits("toggle-drawer");
+};
+
 const navigation = [
   {
     url: "/projects",
@@ -14,12 +20,13 @@ const navigation = [
   },
 ];
 
-import Logo from "assets/images/logo.svg";
+import LogoIcon from "assets/images/logo.svg";
+import MenuButtonIcon from "assets/images/lines.svg";
 </script>
 <template>
-  <header>
+  <header class="header">
     <div class="left-side">
-      <Logo width="160" height="39" />
+      <LogoIcon id="logo-icon" />
       <ul class="sections">
         <li v-for="item in navigation">
           <a :href="item.url">{{ item.label }}</a>
@@ -27,46 +34,95 @@ import Logo from "assets/images/logo.svg";
       </ul>
     </div>
     <div class="right-side">
-      <IconText src="assets/images/phone.svg">
+      <IconText id="phone-icon-text" src="assets/images/phone.svg">
         <a href="tel:79009009090">+7 (900) 900-90-90</a>
       </IconText>
-      <Button>Оставить заявку</Button>
+      <Button id="request-button" variant="primary">Оставить заявку</Button>
+      <Button id="menu-button" variant="primary" @click="toggleDrawer">
+        <MenuButtonIcon id="menu-button-icon" />
+      </Button>
     </div>
   </header>
 </template>
 <style lang="scss" scoped>
-@use "assets/scss/variables" as *;
-@use "assets/scss/mixins" as mixins;
+@use "assets/scss/variables" as v;
+@use "assets/scss/mixins" as m;
 
-header {
-  @include mixins.flex-row;
+.header {
+  @include m.row-center;
   justify-content: space-between;
+  gap: 24px;
+
+  height: 60px;
   padding: 24px 88px;
-  background-color: $white;
+
+  @include m.at-most("large") {
+    padding: 24px 24px;
+  }
 }
 
 .left-side {
-  @include mixins.flex-row;
+  @include m.row-center;
   gap: 80px;
 }
 
-.sections {
-  @include mixins.flex-row;
-  @include mixins.simple-ul;
-  gap: 24px;
-  font-size: 16px;
+#logo-icon {
+  flex-shrink: 0;
+
+  width: 160px;
+  height: 40px;
 }
 
-.sections a {
-  color: $dim-gray;
+.sections {
+  @include m.row-center;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: 24px;
+
+  font-size: 16px;
+
+  @include m.at-most("medium") {
+    display: none;
+  }
 }
 
 .right-side {
-  @include mixins.flex-row;
+  @include m.row-center;
   gap: 24px;
 }
 
-.icon-text a {
-  color: $dark-slate-gray;
+#phone-icon-text {
+  white-space: nowrap;
+
+  color: v.$color-secondary;
+
+  @include m.at-most("small") {
+    display: none;
+  }
+}
+
+#request-button {
+  height: 50px;
+  width: 200px;
+  padding: 16px 40px;
+
+  @include m.at-most("medium") {
+    display: none;
+  }
+}
+
+#menu-button {
+  height: 50px;
+  width: 55px;
+  padding: 16px;
+
+  @include m.at-least("medium") {
+    display: none;
+  }
+}
+
+#menu-button-icon {
+  width: max-content;
+  height: max-content;
 }
 </style>
