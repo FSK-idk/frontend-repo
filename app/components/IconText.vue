@@ -19,7 +19,7 @@ const Icon = computed(() => {
 });
 </script>
 <template>
-  <div :class="['icon-text', variant]">
+  <div class="icon-text">
     <Icon :class="['icon', variant]" />
     <slot />
   </div>

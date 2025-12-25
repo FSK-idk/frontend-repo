@@ -5,6 +5,12 @@ const toggleDrawer = () => {
   isOpen.value = ~isOpen.value;
 };
 
+useHead({
+  bodyAttrs: {
+    style: computed(() => (isOpen.value ? "overflow: hidden" : "")),
+  },
+});
+
 defineExpose({ toggleDrawer });
 
 const navigation = [
@@ -42,6 +48,7 @@ const contacts = [
 import CloseButtonIcon from "assets/images/cross.svg";
 </script>
 <template>
+  <div class="backdrop" :class="{ open: isOpen }" @click="toggleDrawer" />
   <div class="drawer" :class="{ open: isOpen }">
     <Button id="close-button" variant="transparent" @click="toggleDrawer">
       <CloseButtonIcon id="close-button-icon" />
@@ -65,6 +72,23 @@ import CloseButtonIcon from "assets/images/cross.svg";
 <style lang="scss" scoped>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(0 0 0 / 0.4);
+
+  transform: translateX(100%);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
 
 .drawer {
   @include m.column-center;
