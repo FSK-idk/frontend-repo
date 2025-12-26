@@ -1,20 +1,8 @@
 <template>
-  <div class="block-container">
-    <div class="block">
-      <p>Мы очень отзывчивы...</p>
-    </div>
-    <div class="block">
-      <div style="text-align: center">
-        <a href="https://youtu.be/U2Fjfqm-7g8">
-          <img
-            src="assets/images/maxwell.png"
-            alt="Максвелл"
-            class="block-image"
-          />
-        </a>
-        <br />
-        <b>Здесь</b> мог быть ваш кот
-      </div>
+  <div class="wrapper">
+    <div class="main">
+      <Slider class="slider" />
+      <Intro class="intro" />
     </div>
   </div>
 </template>
@@ -23,42 +11,20 @@
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
-.block-container {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 20px;
-  height: 100%;
-  padding: 20px;
-  background-color: cadetblue;
+.main {
+  @include m.flex(column);
+  @include m.box(100%, 100%, 40px 88px 0 88px);
+
+  @include m.at-most("large") {
+    @include m.box(null, 100%, 0 24px);
+  }
 }
 
-.block {
-  @include m.card(aqua);
-  flex: 1 1 0;
-  padding: 20px;
+.slider {
+  @include m.box(100%, 100%);
 }
 
-.card-container {
-  flex: 0 1 auto;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-}
-
-.card {
-  @include m.card(v.$snow);
-  flex: 0 1 auto;
-}
-
-.block-image {
-  width: 60%;
-  border-radius: 20px;
-}
-
-.block-image:hover {
-  opacity: 70%;
+.intro {
+  @include m.box(100%, 100%, 120px 0);
 }
 </style>

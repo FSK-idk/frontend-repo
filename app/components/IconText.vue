@@ -29,26 +29,20 @@ const Icon = computed(() => {
 @use "assets/scss/mixins" as m;
 
 .icon-text {
-  @include m.row-center;
-  align-items: start;
-  gap: 8px;
-
-  font-family: v.$font-title;
-  font-size: 14px;
+  @include m.flex(row, 8px);
+  @include m.font(14px, null, v.$font-title);
 }
 
 .icon {
-  flex-shrink: 0;
-
-  width: 16px;
-  height: 16px;
+  @include m.self(null, null, 0);
+  @include m.svg(16px, 16px);
 
   &.primary {
-    fill: v.$color-primary;
+    @include m.svg(16px, 16px, v.$color-primary);
   }
 
   &.white {
-    fill: v.$color-white;
+    @include m.svg(16px, 16px, v.$color-white);
   }
 }
 </style>

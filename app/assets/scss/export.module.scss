@@ -1,0 +1,7 @@
+@use "assets/scss/variables" as v;
+
+:export {
+  largeScreenSize: v.$large-screen-size;
+  mediumScreenSize: v.$medium-screen-size;
+  smallScreenSize: v.$small-screen-size;
+}

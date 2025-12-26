@@ -1,32 +1,96 @@
-@use "sass:color";
 @use "sass:map";
-@use "assets/scss/variables.scss" as *;
+@use "assets/scss/variables" as v;
 
-@mixin card($fill: gray) {
-  padding: 20px;
-  background-color: $fill;
+@mixin position(
+  $pos: null,
+  $top: null,
+  $left: null,
+  $x: null,
+  $y: null,
+  $z: null
+) {
+  position: $pos;
+  top: $top;
+  left: $left;
+  z-index: $z;
+  transform: translate(#{if($x, $x, 0)}, #{if($y, $y, 0)});
+}
+
+@mixin flex($dir: null, $gap: null, $justify: null, $align: null, $wrap: null) {
+  display: flex;
+  flex-direction: $dir;
+  gap: $gap;
+  align-items: $align;
+  justify-content: $justify;
+  flex-wrap: $wrap;
+}
+
+@mixin grid($cols: null, $gap: null) {
+  display: grid;
+  gap: $gap;
+  grid-template-columns: $cols;
+}
+
+@mixin self($justify: null, $align: null, $shrink: null) {
+  justify-self: $justify;
+  align-self: $align;
+  flex-shrink: $shrink;
+}
+
+@mixin box($width: null, $height: null, $pad: null, $radius: null) {
+  width: $width;
+  height: $height;
+  padding: $pad;
   border: none;
-  border-radius: 10px;
+  border-radius: $radius;
+  @if $radius and $radius > 0 {
+    overflow: hidden;
+  }
 }
 
-@mixin row-center {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
+@mixin paint($bg-color: null, $color: null) {
+  background-color: $bg-color;
+  color: $color;
 }
 
-@mixin column-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
+@mixin effect($brightness: null, $opacity: null) {
+  filter: brightness($brightness);
+  opacity: $opacity;
+}
+
+@mixin font($size: null, $weight: null, $family: null) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin text($height: null, $align: null, $space: null, $wrap: null) {
+  line-height: $height;
+  text-align: $align;
+  white-space: $space;
+  text-wrap: $wrap;
+}
+
+@mixin interaction($events: null, $cursor: null) {
+  pointer-events: $events;
+  cursor: $cursor;
+}
+
+@mixin svg($width: null, $height: null, $fill: null) {
+  width: $width;
+  height: $height;
+  fill: $fill;
+}
+
+@mixin ratio($ratio: null, $fit: null) {
+  aspect-ratio: $ratio;
+  object-fit: $fit;
 }
 
 $sizes: (
-  "small": 600px,
-  "medium": 900px,
-  "large": 1100px,
+  "large": v.$large-screen-size,
+  "medium": v.$medium-screen-size,
+  "small": v.$small-screen-size,
 );
 
 @mixin at-least($size) {
@@ -38,17 +102,5 @@ $sizes: (
 @mixin at-most($size) {
   @media (width < map.get($sizes, $size)) {
     @content;
-  }
-}
-
-@mixin button($fill: gray) {
-  @include card($fill);
-  cursor: pointer;
-
-  &:hover {
-    background-color: color.adjust($fill, $blackness: 5%);
-  }
-  &:active {
-    background-color: color.adjust($fill, $blackness: 10%);
   }
 }

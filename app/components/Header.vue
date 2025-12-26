@@ -20,8 +20,8 @@ const navigation = [
   },
 ];
 
-import LogoIcon from "assets/images/logo.svg";
-import MenuButtonIcon from "assets/images/lines.svg";
+import LogoIcon from "assets/icons/logo.svg";
+import MenuButtonIcon from "assets/icons/lines.svg";
 </script>
 <template>
   <header class="header">
@@ -34,10 +34,12 @@ import MenuButtonIcon from "assets/images/lines.svg";
       </ul>
     </div>
     <div class="right-side">
-      <IconText id="phone-icon-text" src="assets/images/phone.svg">
+      <IconText id="phone-icon-text" src="assets/icons/phone.svg">
         <a href="tel:79009009090">+7 (900) 900-90-90</a>
       </IconText>
-      <Button id="request-button" variant="primary">Оставить заявку</Button>
+      <Button id="request-button" variant="primary">
+        <p id="request-button-text">Оставить заявку</p>
+      </Button>
       <Button id="menu-button" variant="primary" @click="toggleDrawer">
         <MenuButtonIcon id="menu-button-icon" />
       </Button>
@@ -49,37 +51,26 @@ import MenuButtonIcon from "assets/images/lines.svg";
 @use "assets/scss/mixins" as m;
 
 .header {
-  @include m.row-center;
-  justify-content: space-between;
-  gap: 24px;
-
-  height: 60px;
-  padding: 24px 88px;
+  @include m.flex(row, 24px, space-between);
+  @include m.box(100%, 108px, 0 88px);
 
   @include m.at-most("large") {
-    padding: 24px 24px;
+    @include m.box(100%, 108px, 0 24px);
   }
 }
 
 .left-side {
-  @include m.row-center;
-  gap: 80px;
+  @include m.flex(row, 80px, null, center);
 }
 
 #logo-icon {
-  flex-shrink: 0;
-
-  width: 160px;
-  height: 40px;
+  @include m.self(null, null, 0);
+  @include m.svg(160px, 40px);
 }
 
 .sections {
-  @include m.row-center;
-  justify-content: start;
-  flex-wrap: wrap;
-  gap: 24px;
-
-  font-size: 16px;
+  @include m.flex(row, 24px, start, null, wrap);
+  @include m.font(16px);
 
   @include m.at-most("medium") {
     display: none;
@@ -87,14 +78,12 @@ import MenuButtonIcon from "assets/images/lines.svg";
 }
 
 .right-side {
-  @include m.row-center;
-  gap: 24px;
+  @include m.flex(row, 24px, null, center);
 }
 
 #phone-icon-text {
-  white-space: nowrap;
-
-  color: v.$color-secondary;
+  @include m.paint(null, v.$color-secondary);
+  @include m.text(null, null, nowrap);
 
   @include m.at-most("small") {
     display: none;
@@ -102,19 +91,19 @@ import MenuButtonIcon from "assets/images/lines.svg";
 }
 
 #request-button {
-  height: 50px;
-  width: 200px;
-  padding: 16px 40px;
+  @include m.box(200px, 50px);
 
   @include m.at-most("medium") {
     display: none;
   }
 }
 
+#request-button-text {
+  @include m.font(14px);
+}
+
 #menu-button {
-  height: 50px;
-  width: 55px;
-  padding: 16px;
+  @include m.box(50px, 50px);
 
   @include m.at-least("medium") {
     display: none;
@@ -122,7 +111,6 @@ import MenuButtonIcon from "assets/images/lines.svg";
 }
 
 #menu-button-icon {
-  width: max-content;
-  height: max-content;
+  @include m.svg(24px, 14px, v.$color-white);
 }
 </style>

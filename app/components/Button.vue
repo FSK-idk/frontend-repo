@@ -11,39 +11,36 @@ const click = () => {
 };
 </script>
 <template>
-  <button :class="['button', variant]" @click="click">
-    <slot />
-  </button>
+  <div class="wrapper">
+    <button :class="['button', variant]" @click="click"><slot /></button>
+  </div>
 </template>
 <style lang="scss" scoped>
+@use "sass:color";
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
 .button {
-  @include m.row-center;
-
-  border: none;
-  border-radius: 10px;
-
-  font-family: v.$font-title;
-  font-size: 14px;
-
-  color: v.$color-white;
+  @include m.flex(row, null, center, center);
+  @include m.box(100%, 100%, 0, 10px);
+  @include m.paint(null, v.$color-white);
+  @include m.font(14px, v.$font-title);
+  @include m.interaction(auto, pointer);
 
   &.default {
-    background-color: v.$color-default;
+    @include m.paint(v.$color-default);
   }
 
   &.primary {
-    background-color: v.$color-primary;
+    @include m.paint(v.$color-primary);
   }
 
   &.secondary {
-    background-color: v.$color-secondary;
+    @include m.paint(v.$color-secondary);
   }
 
   &.transparent {
-    background-color: rgba(v.$color-white, 0.2);
+    @include m.paint(color.change(v.$color-white, $alpha: 0.2));
   }
 }
 </style>
