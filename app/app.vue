@@ -1,11 +1,7 @@
 <script setup>
 const drawerRef = ref(null);
 
-const toggleDrawer = () => {
-  if (drawerRef.value) {
-    drawerRef.value.toggleDrawer();
-  }
-};
+const toggleDrawer = () => drawerRef.value?.toggleDrawer();
 </script>
 <template>
   <main>
@@ -47,9 +43,12 @@ a {
 
 html,
 body,
-#__nuxt,
-main {
+#__nuxt {
   height: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 main {

@@ -29,43 +29,45 @@ const navigation = [
 ];
 const contacts = [
   {
-    img: "assets/images/phone.svg",
+    img: "assets/icons/phone.svg",
     url: "tel:79009009090",
     label: "+7 (900) 900-90-90",
   },
   {
-    img: "assets/images/mail.svg",
+    img: "assets/icons/mail.svg",
     url: "mailto:info@gmail.com",
     label: "info@gmail.com",
   },
   {
-    img: "assets/images/map.svg",
+    img: "assets/icons/map.svg",
     url: "geo:г. Владивосток ул. Выселковая 49, стр. 3",
     label: "г. Владивосток\nул. Выселковая 49, стр. 3",
   },
 ];
 
-import CloseButtonIcon from "assets/images/cross.svg";
+import CloseButtonIcon from "assets/icons/cross.svg";
 </script>
 <template>
-  <div class="backdrop" :class="{ open: isOpen }" @click="toggleDrawer" />
-  <div class="drawer" :class="{ open: isOpen }">
-    <Button id="close-button" variant="transparent" @click="toggleDrawer">
-      <CloseButtonIcon id="close-button-icon" />
-    </Button>
-    <div class="content">
-      <ul class="sections">
-        <li v-for="item in navigation">
-          <a :href="item.url">{{ item.label }}</a>
-        </li>
-      </ul>
-      <ul class="sections">
-        <li v-for="item in contacts">
-          <IconText :src="item.img" variant="white">
+  <div class="wrapper">
+    <div class="backdrop" :class="{ open: isOpen }" @click="toggleDrawer" />
+    <div class="drawer" :class="{ open: isOpen }">
+      <Button class="button" variant="transparent" @click="toggleDrawer">
+        <CloseButtonIcon class="icon" />
+      </Button>
+      <div class="content">
+        <ul class="sections">
+          <li v-for="item in navigation">
             <a :href="item.url">{{ item.label }}</a>
-          </IconText>
-        </li>
-      </ul>
+          </li>
+        </ul>
+        <ul class="sections">
+          <li v-for="item in contacts">
+            <IconText :src="item.img" variant="white">
+              <a :href="item.url">{{ item.label }}</a>
+            </IconText>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -74,70 +76,44 @@ import CloseButtonIcon from "assets/images/cross.svg";
 @use "assets/scss/mixins" as m;
 
 .backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-
-  background-color: rgb(0 0 0 / 0.4);
-
-  transform: translateX(100%);
+  @include m.position(fixed, 0, 0, 100%, null, 1000);
+  @include m.box(100%, 100%);
+  @include m.paint(rgb(0 0 0 / 0.4));
 
   &.open {
-    transform: translateX(0);
+    @include m.position(fixed, 0, 0, 0, null, 1000);
   }
 }
 
 .drawer {
-  @include m.column-center;
-  gap: 40px;
-  overflow: auto;
-
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-  height: calc(100% - 40px);
-  padding: 20px;
-
-  background-color: v.$color-primary;
-
-  transform: translateX(100%);
+  @include m.position(fixed, 0, 100%, 0, null, 1000);
+  @include m.flex(column, 40px, end);
+  @include m.box(null, 100%, 20px);
+  @include m.paint(v.$color-primary);
 
   &.open {
-    transform: translateX(0);
+    @include m.position(fixed, 0, 100%, -100%, null, 1000);
   }
 }
 
-#close-button {
-  align-self: end;
-
-  height: 32px;
-  width: 32px;
-  padding: 10px;
+.button {
+  @include m.self(null, end, 0);
+  @include m.box(48px, 48px);
 }
 
-#close-button-icon {
-  width: max-content;
-  height: max-content;
+.icon {
+  @include m.svg(12px, 12px, v.$color-white);
 }
 
 .content {
-  @include m.column-center;
-  justify-content: space-between;
-  height: 100%;
+  @include m.flex(column, 0, space-between, center);
+  @include m.box(null, 100%);
 }
 
 .sections {
-  @include m.column-center;
-  align-items: start;
-  gap: 24px;
-  white-space: break-spaces;
-
-  color: v.$color-white;
-
-  font-size: 18px;
+  @include m.flex(column, 24px, null, start);
+  @include m.paint(null, v.$color-white);
+  @include m.font(18px);
+  @include m.text(null, null, break-spaces, nowrap);
 }
 </style>
