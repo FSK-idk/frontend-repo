@@ -11,11 +11,13 @@ const click = () => {
 };
 </script>
 <template>
-  <div class="wrapper">
-    <button :class="['button', variant]" @click="click"><slot /></button>
+  <div :class="$style.wrapper">
+    <button :class="[$style.button, $style[variant]]" @click="click">
+      <slot />
+    </button>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "sass:color";
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
@@ -41,6 +43,11 @@ const click = () => {
 
   &.transparent {
     @include m.paint(color.change(v.$color-white, $alpha: 0.2));
+  }
+
+  &.outline {
+    @include m.paint(transparent, v.$color-primary);
+    border: solid v.$color-primary 1px;
   }
 }
 </style>

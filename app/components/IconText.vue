@@ -1,6 +1,6 @@
 <script setup>
 const props = defineProps({
-  src: {
+  icon: {
     type: String,
     required: true,
   },
@@ -14,17 +14,19 @@ const base = import.meta.env.BASE_URL;
 
 const Icon = computed(() => {
   return defineAsyncComponent(() =>
-    import(/* @vite-ignore */ `${base}${props.src}`)
+    import(/* @vite-ignore */ `${base}assets/icons/${props.icon}.svg`)
   );
 });
 </script>
 <template>
-  <div class="icon-text">
-    <Icon :class="['icon', variant]" />
-    <slot />
+  <div :class="$style.wrapper">
+    <div :class="$style.iconText">
+      <Icon :class="[$style.icon, $style[variant]]" />
+      <slot />
+    </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 

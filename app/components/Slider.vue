@@ -66,9 +66,9 @@ const slides = [
 import vars from "assets/scss/export.module.scss";
 </script>
 <template>
-  <div class="wrapper">
+  <div :class="$style.wrapper">
     <Carousel
-      class="carousel"
+      :class="$style.carousel"
       ref="carouselRef"
       v-model="currentSlide"
       :wrap-around="true"
@@ -77,7 +77,7 @@ import vars from "assets/scss/export.module.scss";
       :transition="500"
     >
       <Slide v-for="slide in slides" :key="slide.id ?? slide.src">
-        <figure class="slide">
+        <figure :class="$style.slide">
           <picture>
             <source
               :srcset="`${slide.image_landscape.x2} 2x, ${slide.image_landscape.x1}`"
@@ -88,7 +88,7 @@ import vars from "assets/scss/export.module.scss";
             />
             <img :src="slide.image_portrait.x1" :alt="slide.title" />
           </picture>
-          <figcaption class="caption">
+          <figcaption :class="$style.caption">
             <strong>{{ slide.title }}</strong>
             <p>{{ slide.text }}</p>
           </figcaption>
@@ -96,7 +96,7 @@ import vars from "assets/scss/export.module.scss";
       </Slide>
       <template #addons>
         <SliderControls
-          class="slider-controls"
+          :class="$style.sliderControls"
           :count="slides.length"
           :current="currentSlide"
           @prev="goPrev"
@@ -107,7 +107,7 @@ import vars from "assets/scss/export.module.scss";
     </Carousel>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "sass:list";
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;

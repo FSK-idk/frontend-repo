@@ -19,22 +19,24 @@ import LeftArrowIcon from "assets/icons/left-arrow.svg";
 import RightArrowIcon from "assets/icons/right-arrow.svg";
 </script>
 <template>
-  <div class="wrapper">
-    <div class="main-layout">
-      <div class="button-layout">
-        <Button class="button" @click="onPrev" variant="primary">
-          <LeftArrowIcon class="icon" />
+  <div :class="$style.wrapper">
+    <div :class="$style.mainLayout">
+      <div :class="$style.buttonLayout">
+        <Button :class="$style.button" @click="onPrev" variant="primary">
+          <LeftArrowIcon :class="$style.icon" />
         </Button>
-        <Button class="button" @click="onNext" variant="primary">
-          <RightArrowIcon class="icon" />
+        <Button :class="$style.button" @click="onNext" variant="primary">
+          <RightArrowIcon :class="$style.icon" />
         </Button>
       </div>
-      <div class="pagination-layout">
+      <div :class="$style.paginationLayout">
         <button
           v-for="index in props.count"
-          class="bullet"
+          :class="[
+            $style.bullet,
+            { [$style.isActive]: props.current === index - 1 },
+          ]"
           :key="index - 1"
-          :class="{ 'is-active': props.current === index - 1 }"
           :title="`Открыть ${index} слайд`"
           @click="onGoTo(index - 1)"
         />
@@ -42,7 +44,7 @@ import RightArrowIcon from "assets/icons/right-arrow.svg";
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
