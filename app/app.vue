@@ -13,27 +13,15 @@ const toggleDrawer = () => drawerRef.value?.toggleDrawer();
 </template>
 <style lang="scss">
 @use "assets/scss/variables" as v;
+@use "assets/scss/mixins" as m;
 
 body {
   margin: 0;
   padding: 0;
 
-  color: v.$color-text;
-  background-color: v.$color-white;
+  @include m.paint(v.$color-white, v.$color-text);
 
   font-family: v.$font-text;
-  font-size: 24px;
-}
-
-p,
-button {
-  font-family: v.$font-text;
-  font-size: 24px;
-}
-
-h1 {
-  font-family: v.$font-title;
-  font-size: 36px;
 }
 
 a {

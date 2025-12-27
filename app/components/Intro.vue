@@ -15,21 +15,21 @@ const years_info = {
 };
 </script>
 <template>
-  <div class="wrapper">
-    <div class="intro-layout">
-      <div class="info">
+  <div :class="$style.wrapper">
+    <div :class="$style.introLayout">
+      <div :class="$style.info">
         <strong>{{ intro_info.title }}</strong>
         <p>{{ intro_info.body }}</p>
       </div>
-      <div class="card-layout">
+      <div :class="$style.cardLayout">
         <InfoCard
-          class="card"
+          :class="$style.card"
           :icon="houses_info.icon"
           :title="houses_info.title"
           :body="houses_info.body"
         />
         <InfoCard
-          class="card"
+          :class="$style.card"
           :icon="years_info.icon"
           :title="years_info.title"
           :body="years_info.body"
@@ -38,7 +38,7 @@ const years_info = {
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 

@@ -29,17 +29,17 @@ const navigation = [
 ];
 const contacts = [
   {
-    img: "assets/icons/phone.svg",
+    icon: "phone",
     url: "tel:79009009090",
     label: "+7 (900) 900-90-90",
   },
   {
-    img: "assets/icons/mail.svg",
+    icon: "mail",
     url: "mailto:info@gmail.com",
     label: "info@gmail.com",
   },
   {
-    img: "assets/icons/map.svg",
+    icon: "map",
     url: "geo:г. Владивосток ул. Выселковая 49, стр. 3",
     label: "г. Владивосток\nул. Выселковая 49, стр. 3",
   },
@@ -48,21 +48,28 @@ const contacts = [
 import CloseButtonIcon from "assets/icons/cross.svg";
 </script>
 <template>
-  <div class="wrapper">
-    <div class="backdrop" :class="{ open: isOpen }" @click="toggleDrawer" />
-    <div class="drawer" :class="{ open: isOpen }">
-      <Button class="button" variant="transparent" @click="toggleDrawer">
-        <CloseButtonIcon class="icon" />
+  <div :class="$style.wrapper">
+    <div
+      :class="[$style.backdrop, { [$style.open]: isOpen }]"
+      @click="toggleDrawer"
+    />
+    <div :class="[$style.drawer, { [$style.open]: isOpen }]">
+      <Button
+        :class="$style.button"
+        variant="transparent"
+        @click="toggleDrawer"
+      >
+        <CloseButtonIcon :class="$style.icon" />
       </Button>
-      <div class="content">
-        <ul class="sections">
+      <div :class="$style.contentLayout">
+        <ul :class="$style.sectionsLayout">
           <li v-for="item in navigation">
             <a :href="item.url">{{ item.label }}</a>
           </li>
         </ul>
-        <ul class="sections">
+        <ul :class="$style.sectionsLayout">
           <li v-for="item in contacts">
-            <IconText :src="item.img" variant="white">
+            <IconText :icon="item.icon" variant="white">
               <a :href="item.url">{{ item.label }}</a>
             </IconText>
           </li>
@@ -71,7 +78,7 @@ import CloseButtonIcon from "assets/icons/cross.svg";
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
@@ -105,12 +112,12 @@ import CloseButtonIcon from "assets/icons/cross.svg";
   @include m.svg(12px, 12px, v.$color-white);
 }
 
-.content {
+.content-layout {
   @include m.flex(column, 0, space-between, center);
   @include m.box(null, 100%);
 }
 
-.sections {
+.sections-layout {
   @include m.flex(column, 24px, null, start);
   @include m.paint(null, v.$color-white);
   @include m.font(18px);

@@ -23,9 +23,9 @@ const Icon = computed(() => {
 });
 </script>
 <template>
-  <div class="wrapper">
-    <div class="card-layout">
-      <Icon class="icon" />
+  <div :class="$style.wrapper">
+    <div :class="$style.cardLayout">
+      <Icon :class="$style.icon" />
       <div>
         <strong>{{ props.title }}</strong>
         <p>{{ props.body }}</p>
@@ -33,7 +33,7 @@ const Icon = computed(() => {
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 

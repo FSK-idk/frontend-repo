@@ -15,17 +15,17 @@ const navigation = [
 ];
 const contacts = [
   {
-    img: "assets/icons/phone.svg",
+    icon: "phone",
     url: "tel:79009009090",
     label: "+7 (900) 900-90-90",
   },
   {
-    img: "assets/icons/mail.svg",
+    icon: "mail",
     url: "mailto:info@gmail.com",
     label: "info@gmail.com",
   },
   {
-    img: "assets/icons/map.svg",
+    icon: "map",
     url: "geo:г. Владивосток ул. Выселковая 49, стр. 3",
     label: "г. Владивосток\nул. Выселковая 49, стр. 3",
   },
@@ -48,38 +48,40 @@ const legality = [
 import LogoIcon from "assets/icons/logo-alt.svg";
 </script>
 <template>
-  <footer class="footer">
-    <div class="top-row">
-      <LogoIcon id="logo-icon" />
-      <ul class="sections">
-        <li v-for="item in navigation">
-          <a :href="item.url">{{ item.label }}</a>
-        </li>
-      </ul>
-      <ul class="sections">
-        <li v-for="item in contacts">
-          <IconText :src="item.img" variant="primary">
+  <div :class="$style.wrapper">
+    <footer :class="$style.footer">
+      <div :class="$style.topLayout">
+        <LogoIcon :class="$style.logoIcon" />
+        <ul :class="$style.sections">
+          <li v-for="item in navigation">
             <a :href="item.url">{{ item.label }}</a>
-          </IconText>
+          </li>
+        </ul>
+        <ul :class="$style.sections">
+          <li v-for="item in contacts">
+            <IconText :icon="item.icon" variant="primary">
+              <a :href="item.url">{{ item.label }}</a>
+            </IconText>
+          </li>
+        </ul>
+        <Button :class="$style.requestButton" variant="primary">
+          <p>Оставить заявку</p>
+        </Button>
+      </div>
+      <ul :class="$style.bottomLayout">
+        <li v-for="item in legality">
+          <template v-if="item.url == null">
+            {{ item.label }}
+          </template>
+          <template v-else>
+            <a :href="item.url">{{ item.label }}</a>
+          </template>
         </li>
       </ul>
-      <Button id="request-button" variant="primary">
-        <p id="request-button-text">Оставить заявку</p>
-      </Button>
-    </div>
-    <ul class="bottom-row">
-      <li v-for="item in legality">
-        <template v-if="item.url == null">
-          {{ item.label }}
-        </template>
-        <template v-else>
-          <a :href="item.url">{{ item.label }}</a>
-        </template>
-      </li>
-    </ul>
-  </footer>
+    </footer>
+  </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss" module>
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
@@ -98,7 +100,7 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   }
 }
 
-.top-row {
+.top-layout {
   @include m.grid(repeat(4, 1fr), 24px);
 
   @include m.at-most("medium") {
@@ -106,7 +108,7 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   }
 }
 
-.bottom-row {
+.bottom-layout {
   @include m.grid(repeat(4, 1fr), 24px);
   @include m.paint(null, v.$color-white);
   @include m.effect(null, 60%);
@@ -117,7 +119,7 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   }
 }
 
-#logo-icon {
+.logo-icon {
   @include m.self(null, start, 0);
   @include m.svg(160px, 40px);
 }
@@ -129,12 +131,8 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   @include m.text(null, null, break-spaces);
 }
 
-#request-button {
+.request-button {
   @include m.self(end, start);
   @include m.box(200px, 50px);
-}
-
-#request-button-text {
-  @include m.font(14px);
 }
 </style>

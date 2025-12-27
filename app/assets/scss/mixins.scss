@@ -43,7 +43,14 @@
   padding: $pad;
   border: none;
   border-radius: $radius;
-  @if $radius and $radius > 0 {
+
+  $has-radius: false;
+  @each $val in $radius {
+    @if $val != null and $val > 0 {
+      $has-radius: true;
+    }
+  }
+  @if $has-radius {
     overflow: hidden;
   }
 }
