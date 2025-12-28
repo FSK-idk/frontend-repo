@@ -45,48 +45,58 @@ const legality = [
   },
 ];
 
+const requestOpened = ref(false);
+
 import LogoIcon from "assets/icons/logo-alt.svg";
 </script>
 <template>
+  <Request :open="requestOpened" @close="requestOpened = false" />
   <div :class="$style.wrapper">
-    <footer :class="$style.footer">
-      <div :class="$style.topLayout">
-        <LogoIcon :class="$style.logoIcon" />
-        <ul :class="$style.sections">
-          <li v-for="item in navigation">
-            <a :href="item.url">{{ item.label }}</a>
-          </li>
-        </ul>
-        <ul :class="$style.sections">
-          <li v-for="item in contacts">
-            <IconText :icon="item.icon" variant="primary">
-              <a :href="item.url">{{ item.label }}</a>
-            </IconText>
-          </li>
-        </ul>
-        <Button :class="$style.requestButton" variant="primary">
-          <p>Оставить заявку</p>
-        </Button>
-      </div>
-      <ul :class="$style.bottomLayout">
-        <li v-for="item in legality">
-          <template v-if="item.url == null">
-            {{ item.label }}
-          </template>
-          <template v-else>
-            <a :href="item.url">{{ item.label }}</a>
-          </template>
+    <footer :class="$style.mainLayout">
+      <LogoIcon :class="$style.logoIcon" />
+      <ul :class="[$style.sections, $style.navigation]">
+        <li v-for="item in navigation">
+          <a :href="item.url">{{ item.label }}</a>
         </li>
+      </ul>
+      <ul :class="[$style.sections, $style.contacts]">
+        <li v-for="item in contacts">
+          <IconText :icon="item.icon" variant="primary">
+            <a :href="item.url">{{ item.label }}</a>
+          </IconText>
+        </li>
+      </ul>
+      <Button
+        :class="$style.requestButton"
+        variant="primary"
+        @click="requestOpened = true"
+      >
+        <p>Оставить заявку</p>
+      </Button>
+      <ul :class="$style.legalityLayout">
+        <p :class="$style.copyright">
+          {{ legality[0].label }}
+        </p>
+        <p :class="$style.privacy">
+          <a :href="legality[1].url">{{ legality[1].label }}</a>
+        </p>
+        <p :class="$style.agreement">
+          <a :href="legality[2].url">{{ legality[2].label }}</a>
+        </p>
       </ul>
     </footer>
   </div>
 </template>
 <style lang="scss" module>
+@use "sass:color";
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
-.footer {
-  @include m.flex(column, 24px);
+.main-layout {
+  @include m.grid(repeat(4, 1fr), 24px);
+  grid-template-areas:
+    "logo      navigation contacts  button"
+    "copyright privacy    agreement .";
   @include m.box(null, null, 24px 88px);
   @include m.paint(v.$color-secondary);
 
@@ -100,26 +110,8 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   }
 }
 
-.top-layout {
-  @include m.grid(repeat(4, 1fr), 24px);
-
-  @include m.at-most("medium") {
-    @include m.flex(column, 40px, null);
-  }
-}
-
-.bottom-layout {
-  @include m.grid(repeat(4, 1fr), 24px);
-  @include m.paint(null, v.$color-white);
-  @include m.effect(null, 60%);
-  @include m.font(14px);
-
-  @include m.at-most("medium") {
-    @include m.flex(column, 24px);
-  }
-}
-
 .logo-icon {
+  grid-area: logo;
   @include m.self(null, start, 0);
   @include m.svg(160px, 40px);
 }
@@ -129,10 +121,40 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   @include m.paint(null, v.$color-white);
   @include m.font(16px);
   @include m.text(null, null, break-spaces);
+
+  &.navigation {
+    grid-area: navigation;
+  }
+  &.contacts {
+    grid-area: contacts;
+  }
 }
 
 .request-button {
+  grid-area: button;
+
   @include m.self(end, start);
   @include m.box(200px, 50px);
+}
+
+.legality-layout {
+  display: contents;
+  @include m.paint(null, color.change(v.$color-white, $alpha: 0.6));
+
+  @include m.at-most("medium") {
+    @include m.flex(column, 24px);
+  }
+}
+
+.copyright {
+  grid-area: copyright;
+}
+
+.privacy {
+  grid-area: privacy;
+}
+
+.agreement {
+  grid-area: agreement;
 }
 </style>

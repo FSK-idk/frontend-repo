@@ -20,10 +20,13 @@ const navigation = [
   },
 ];
 
+const requestOpened = ref(false);
+
 import LogoIcon from "assets/icons/logo.svg";
 import MenuButtonIcon from "assets/icons/lines.svg";
 </script>
 <template>
+  <Request :open="requestOpened" @close="requestOpened = false" />
   <div :class="$style.wrapper">
     <header :class="$style.mainLayout">
       <div :class="$style.leftLayout">
@@ -38,7 +41,11 @@ import MenuButtonIcon from "assets/icons/lines.svg";
         <IconText :class="$style.phone" icon="phone">
           <a href="tel:79009009090">+7 (900) 900-90-90</a>
         </IconText>
-        <Button :class="$style.requestButton" variant="primary">
+        <Button
+          :class="$style.requestButton"
+          variant="primary"
+          @click="requestOpened = true"
+        >
           Оставить заявку
         </Button>
         <Button
