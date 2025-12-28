@@ -49,5 +49,9 @@ const click = () => {
     @include m.paint(transparent, v.$color-primary);
     border: solid v.$color-primary 1px;
   }
+
+  &.primary-light {
+    @include m.paint(color.change(v.$color-primary, $alpha: 0.2));
+  }
 }
 </style>
