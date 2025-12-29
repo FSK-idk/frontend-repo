@@ -34,7 +34,7 @@ import CrossIcon from "assets/icons/cross.svg";
         <div :class="$style.closeLayout">
           <Button
             :class="$style.closeButton"
-            variant="primary-light"
+            variant="primary-ghost"
             @click="emit('close')"
           >
             <CrossIcon :class="$style.crossIcon" />
@@ -82,6 +82,6 @@ import CrossIcon from "assets/icons/cross.svg";
   @include m.box(32px, 32px);
 }
 .cross-icon {
-  @include m.svg(12px, 12px, v.$color-primary);
+  @include m.box(12px, 12px);
 }
 </style>

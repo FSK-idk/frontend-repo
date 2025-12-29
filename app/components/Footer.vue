@@ -53,7 +53,9 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   <Request :open="requestOpened" @close="requestOpened = false" />
   <div :class="$style.wrapper">
     <footer :class="$style.mainLayout">
-      <LogoIcon :class="$style.logoIcon" />
+      <NuxtLink to="/">
+        <LogoIcon :class="$style.logoIcon" />
+      </NuxtLink>
       <ul :class="[$style.sections, $style.navigation]">
         <li v-for="item in navigation">
           <a :href="item.url">{{ item.label }}</a>
@@ -105,7 +107,7 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   }
 
   @include m.at-most("medium") {
-    @include m.flex(column, 40px);
+    @include m.flex(column, 40px, none, start);
     @include m.box(null, null, 40px 40px);
   }
 }
@@ -113,7 +115,7 @@ import LogoIcon from "assets/icons/logo-alt.svg";
 .logo-icon {
   grid-area: logo;
   @include m.self(null, start, 0);
-  @include m.svg(160px, 40px);
+  @include m.box(160px, 40px);
 }
 
 .sections {
@@ -132,7 +134,6 @@ import LogoIcon from "assets/icons/logo-alt.svg";
 
 .request-button {
   grid-area: button;
-
   @include m.self(end, start);
   @include m.box(200px, 50px);
 }

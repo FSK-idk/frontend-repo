@@ -64,8 +64,6 @@ const card_infos = [
 .card-layout {
   @include m.self(null, null, 0);
   @include m.grid(1fr 1fr, 16px);
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
   overflow: auto;
   @include m.box(100%, 100%, 0 88px);
 
@@ -75,7 +73,6 @@ const card_infos = [
 }
 
 .card {
-  @include m.self(null, null, 0);
   @include m.box(100%, 300px);
   min-width: 700px;
 

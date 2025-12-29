@@ -1,3 +1,8 @@
+<script setup>
+definePageMeta({
+  title: "Главная",
+});
+</script>
 <template>
   <div :class="$style.wrapper">
     <div :class="$style.mainLayout">

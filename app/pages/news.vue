@@ -1,4 +1,7 @@
 <script setup>
+definePageMeta({
+  title: "Новости",
+});
 import the_end_1x from "assets/images/the-end.jpg";
 import the_end_2x from "assets/images/the-end@2x.jpg";
 
@@ -50,24 +53,52 @@ const cardInfos = [
     body: 'Ставить факелы через каждые 6 блоков — прошлый век. Наши инженеры оптимизировали схемы освещения. Мы выяснили, что сочетание светокамня определённого уровня с тыквенными лампами на определённой высоте подавляет спаун мобов эффективнее, создавая при этом уютную атмосферу. Это знание позволяет нам делать безопасные, но не "засвеченные" территории.',
   },
 ];
+
+// a random generator that supports seed
+function splitmix32(a) {
+  return function () {
+    a |= 0;
+    a = (a + 0x9e3779b9) | 0;
+    let t = a ^ (a >>> 16);
+    t = Math.imul(t, 0x21f0aaad);
+    t = t ^ (t >>> 15);
+    t = Math.imul(t, 0x735a2d97);
+    return ((t = t ^ (t >>> 15)) >>> 0) / 4294967296;
+  };
+}
+
+const getCardInfos = (pageNumber) => {
+  const random = splitmix32(pageNumber);
+  return Array.from({ length: 12 }, () => cardInfos[Math.floor(random() * 4)]);
+};
+
+const currentCardInfos = ref(getCardInfos(1));
+const totalPages = 42;
+const onPage = (val) => {
+  currentCardInfos.value = getCardInfos(val);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 </script>
 <template>
   <div :class="$style.wrapper">
     <div :class="$style.mainLayout">
-      <div :class="$style.topLayout">
+      <Breadcrumbs :class="$style.breadcrumbs" />
+      <div :class="$style.contentLayout">
         <strong :class="$style.title">Новости</strong>
-        <Button :class="$style.button" variant="primary-outline">
-          <NuxtLink to="/news">Все новости</NuxtLink>
-        </Button>
-      </div>
-      <div :class="$style.cardLayout">
-        <ArticleCard
-          v-for="cardInfo in cardInfos"
-          :class="$style.card"
-          :image="cardInfo.image"
-          :date="cardInfo.date"
-          :title="cardInfo.title"
-          :body="cardInfo.body"
+        <div :class="$style.cardLayout">
+          <ArticleCard
+            v-for="card_info in currentCardInfos"
+            :class="$style.card"
+            :image="card_info.image"
+            :date="card_info.date"
+            :title="card_info.title"
+            :body="card_info.body"
+          />
+        </div>
+        <Pagination
+          :class="$style.pagination"
+          :total="totalPages"
+          @onPage="onPage"
         />
       </div>
     </div>
@@ -78,32 +109,45 @@ const cardInfos = [
 @use "assets/scss/mixins" as m;
 
 .main-layout {
-  @include m.flex(column, 32px);
-}
+  @include m.flex(column, 48px);
+  @include m.box(null, null, 40px 88px 80px 88px);
 
-.top-layout {
-  @include m.flex(row, null, space-between);
+  @include m.at-most("large") {
+    @include m.box(null, null, 40px 24px 80px 24px);
+  }
 }
 
 .title {
   @include m.paint(null, v.$color-title);
-  @include m.font(38px, 700, v.$font-title);
+  @include m.font(46px, 700, v.$font-title);
   @include m.text(120%);
 }
 
-.button {
-  @include m.box(150px, 50px);
-}
-.button-text {
-  @include m.font(null, 600);
+.contentLayout {
+  @include m.flex(column, 32px);
 }
 
 .card-layout {
-  @include m.grid(repeat(4, 1fr), 16px);
-  overflow: auto;
+  @include m.grid(repeat(4, 1fr), 32px 16px);
+
+  @include m.at-most("ultra") {
+    @include m.grid(repeat(3, 1fr), 32px 16px);
+  }
+
+  @include m.at-most("large") {
+    @include m.grid(repeat(2, 1fr), 32px 16px);
+  }
+
+  @include m.at-most("compact") {
+    @include m.grid(repeat(1, 1fr), 32px 16px);
+  }
 }
 .card {
   @include m.self(null, null, 0);
   min-width: 300px;
+}
+
+.pagination {
+  @include m.self(null, center);
 }
 </style>

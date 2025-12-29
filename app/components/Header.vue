@@ -30,12 +30,16 @@ import MenuButtonIcon from "assets/icons/lines.svg";
   <div :class="$style.wrapper">
     <header :class="$style.mainLayout">
       <div :class="$style.leftLayout">
-        <LogoIcon :class="$style.logoIcon" />
-        <ul :class="$style.sectionsLayout">
-          <li v-for="item in navigation">
-            <a :href="item.url">{{ item.label }}</a>
-          </li>
-        </ul>
+        <NuxtLink to="/">
+          <LogoIcon :class="$style.logoIcon" />
+        </NuxtLink>
+        <nav :class="$style.sectionsLayout">
+          <template v-for="item in navigation">
+            <NuxtLink :to="item.url" :active-class="$style.activePage">
+              {{ item.label }}
+            </NuxtLink>
+          </template>
+        </nav>
       </div>
       <div :class="$style.rightLayout">
         <IconText :class="$style.phone" icon="phone">
@@ -78,7 +82,7 @@ import MenuButtonIcon from "assets/icons/lines.svg";
 
 .logo-icon {
   @include m.self(null, null, 0);
-  @include m.svg(160px, 40px);
+  @include m.box(160px, 40px);
 }
 
 .sections-layout {
@@ -88,6 +92,10 @@ import MenuButtonIcon from "assets/icons/lines.svg";
   @include m.at-most("medium") {
     display: none;
   }
+}
+
+.active-page {
+  color: v.$color-primary;
 }
 
 .right-layout {
@@ -120,6 +128,6 @@ import MenuButtonIcon from "assets/icons/lines.svg";
 }
 
 .menu-button-icon {
-  @include m.svg(24px, 14px, v.$color-white);
+  @include m.box(24px, 14px);
 }
 </style>

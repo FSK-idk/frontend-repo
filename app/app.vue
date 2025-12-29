@@ -7,7 +7,7 @@ const toggleDrawer = () => drawerRef.value?.toggleDrawer();
   <main>
     <Drawer ref="drawerRef" />
     <Header @toggle-drawer="toggleDrawer" />
-    <Content />
+    <NuxtPage class="page" />
     <Footer />
   </main>
 </template>
@@ -42,5 +42,10 @@ body,
 main {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
+}
+
+.page {
+  flex: 1;
 }
 </style>
