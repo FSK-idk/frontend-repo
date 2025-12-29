@@ -55,6 +55,7 @@ const Icon = computed(() => {
 }
 
 .icon {
-  @include m.svg(24px, 24px, v.$color-primary);
+  @include m.box(24px, 24px);
+  @include m.paint(null, null, v.$color-primary);
 }
 </style>

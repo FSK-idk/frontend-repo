@@ -68,7 +68,7 @@ import RightArrowIcon from "assets/icons/right-arrow.svg";
 }
 
 .icon {
-  @include m.svg(24px, 24px, v.$color-white);
+  @include m.box(24px, 24px);
 }
 
 .pagination-layout {
@@ -78,7 +78,7 @@ import RightArrowIcon from "assets/icons/right-arrow.svg";
 
 .bullet {
   @include m.box(12px, 12px, null, 50%);
-  @include m.paint(v.$color-inactive);
+  @include m.paint(v.$color-gray-dark);
   @include m.interaction(auto, pointer);
 
   &.is-active {

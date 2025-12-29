@@ -55,9 +55,13 @@
   }
 }
 
-@mixin paint($bg-color: null, $color: null) {
+@mixin paint($bg-color: null, $color: null, $fill: null) {
   background-color: $bg-color;
   color: $color;
+  fill: $fill;
+  svg {
+    fill: $fill;
+  }
 }
 
 @mixin effect($brightness: null, $opacity: null) {
@@ -83,20 +87,16 @@
   cursor: $cursor;
 }
 
-@mixin svg($width: null, $height: null, $fill: null) {
-  width: $width;
-  height: $height;
-  fill: $fill;
-}
-
 @mixin ratio($ratio: null, $fit: null) {
   aspect-ratio: $ratio;
   object-fit: $fit;
 }
 
 $sizes: (
+  "ultra": v.$ultra-screen-size,
   "large": v.$large-screen-size,
   "medium": v.$medium-screen-size,
+  "compact": v.$compact-screen-size,
   "small": v.$small-screen-size,
 );
 

@@ -56,7 +56,7 @@ import CloseButtonIcon from "assets/icons/cross.svg";
     <div :class="[$style.drawer, { [$style.open]: isOpen }]">
       <Button
         :class="$style.button"
-        variant="transparent"
+        variant="primary-light"
         @click="toggleDrawer"
       >
         <CloseButtonIcon :class="$style.icon" />
@@ -109,7 +109,7 @@ import CloseButtonIcon from "assets/icons/cross.svg";
 }
 
 .icon {
-  @include m.svg(12px, 12px, v.$color-white);
+  @include m.box(12px, 12px);
 }
 
 .content-layout {

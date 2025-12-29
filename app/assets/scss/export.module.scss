@@ -1,7 +1,9 @@
 @use "assets/scss/variables" as v;
 
 :export {
+  ultraScreenSize: v.$ultra-screen-size;
   largeScreenSize: v.$large-screen-size;
   mediumScreenSize: v.$medium-screen-size;
+  compactScreenSize: v.$compact-screen-size;
   smallScreenSize: v.$small-screen-size;
 }

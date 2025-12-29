@@ -37,14 +37,14 @@ const Icon = computed(() => {
 
 .icon {
   @include m.self(null, null, 0);
-  @include m.svg(16px, 16px);
+  @include m.box(16px, 16px);
 
   &.primary {
-    @include m.svg(16px, 16px, v.$color-primary);
+    @include m.paint(null, null, v.$color-primary);
   }
 
   &.white {
-    @include m.svg(16px, 16px, v.$color-white);
+    @include m.paint(null, null, v.$color-white);
   }
 }
 </style>
