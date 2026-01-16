@@ -13,23 +13,6 @@ const navigation = [
     label: "Контакты",
   },
 ];
-const contacts = [
-  {
-    icon: "phone",
-    url: "tel:79009009090",
-    label: "+7 (900) 900-90-90",
-  },
-  {
-    icon: "mail",
-    url: "mailto:info@gmail.com",
-    label: "info@gmail.com",
-  },
-  {
-    icon: "map",
-    url: "geo:г. Владивосток ул. Выселковая 49, стр. 3",
-    label: "г. Владивосток\nул. Выселковая 49, стр. 3",
-  },
-];
 const legality = [
   {
     url: null,
@@ -61,13 +44,10 @@ import LogoIcon from "assets/icons/logo-alt.svg";
           <a :href="item.url">{{ item.label }}</a>
         </li>
       </ul>
-      <ul :class="[$style.sections, $style.contacts]">
-        <li v-for="item in contacts">
-          <IconText :icon="item.icon" variant="primary">
-            <a :href="item.url">{{ item.label }}</a>
-          </IconText>
-        </li>
-      </ul>
+      <Contacts
+        :class="$style.contacts"
+        :classes="{ text: $style.contactsText }"
+      />
       <Button
         :class="$style.requestButton"
         variant="primary"
@@ -127,9 +107,14 @@ import LogoIcon from "assets/icons/logo-alt.svg";
   &.navigation {
     grid-area: navigation;
   }
-  &.contacts {
-    grid-area: contacts;
-  }
+}
+
+.contactsText {
+  @include m.paint(14px, v.$color-white);
+}
+
+.contacts {
+  grid-area: contacts;
 }
 
 .request-button {

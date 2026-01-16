@@ -25,6 +25,10 @@ export default defineNuxtConfig({
         defaultImport: "component",
       },
     ],
+    "vue-yandex-maps/nuxt",
   ],
+  yandexMaps: {
+    apikey: process.env.YANDEX_MAPS_API_KEY,
+  },
   css: ["assets/scss/main.scss"],
 });
