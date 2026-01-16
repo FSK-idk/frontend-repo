@@ -20,6 +20,9 @@ const navigation = [
   },
 ];
 
+import { contacts } from "assets/mock/contacts";
+const phone = contacts.phone;
+
 const requestOpened = ref(false);
 
 import LogoIcon from "assets/icons/logo.svg";
@@ -43,7 +46,7 @@ import MenuButtonIcon from "assets/icons/lines.svg";
       </div>
       <div :class="$style.rightLayout">
         <IconText :class="$style.phone" icon="phone">
-          <a href="tel:79009009090">+7 (900) 900-90-90</a>
+          <a :href="phone.url">{{ phone.label }}</a>
         </IconText>
         <Button
           :class="$style.requestButton"

@@ -8,6 +8,13 @@ const props = defineProps({
     type: String,
     default: "primary",
   },
+  classes: {
+    type: Object,
+    default: () => ({
+      main: "",
+      icon: "",
+    }),
+  },
 });
 
 const base = import.meta.env.BASE_URL;
@@ -20,8 +27,8 @@ const Icon = computed(() => {
 </script>
 <template>
   <div :class="$style.wrapper">
-    <div :class="$style.iconText">
-      <Icon :class="[$style.icon, $style[variant]]" />
+    <div :class="[$style.mainLayout, props.classes.text, props.classes.main]">
+      <Icon :class="[$style.icon, $style[variant], props.classes.icon]" />
       <slot />
     </div>
   </div>
@@ -30,7 +37,7 @@ const Icon = computed(() => {
 @use "assets/scss/variables" as v;
 @use "assets/scss/mixins" as m;
 
-.icon-text {
+.main-layout {
   @include m.flex(row, 8px);
   @include m.font(14px, null, v.$font-title);
 }
