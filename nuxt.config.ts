@@ -26,6 +26,7 @@ export default defineNuxtConfig({
       },
     ],
     "vue-yandex-maps/nuxt",
+    "@vee-validate/nuxt",
   ],
   yandexMaps: {
     apikey: process.env.YANDEX_MAPS_API_KEY,
